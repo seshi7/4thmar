@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+       - sampledata:/var/lib/mysql
+    environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: db
+       MYSQL_USER: user
+       MYSQL_PASSWORD: user
+       MYSQL_ALLOW_EMPTY_PASSWORD: root
+       MYSQL_RANDOM_ROOT_PASSWORD: root
+
+    ports:
+       - 3305:3305
+  tomcat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+       - 8090:8080
+volumes:
+  sampledata:
+    driver: local
